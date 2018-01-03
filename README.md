@@ -1,2 +1,2 @@
-# rn-turn-right
+# ReactNativeTurnRight
 React Native Turn Right Game
