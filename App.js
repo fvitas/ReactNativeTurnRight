@@ -77,7 +77,8 @@ export default class App extends Component {
             <View style={styles.container}>
                 <TouchableWithoutFeedback onPressIn={this.onTouchStart} onPressOut={this.onTouchEnd}>
                     <Svg width='300' height='500'>
-                        <Rect x='50' y='50' width='200' height='400' rx='100' ry='100' stroke='#9FA8DA' strokeWidth='90' fill='none'/>
+                        <Rect x='5' y='5' width='290' height='490' rx='150' ry='150' fill='#9FA8DA'/>
+                        <Rect x='95' y='95' width='110' height='310' rx='55' ry='55' fill='white'/>
                         <Rect x={this.state.x} y={this.state.y} width='18' height='30' fill='black' rx='5' ry='5' origin={`${this.state.x},${this.state.y}`} rotation={this.state.rotation}/>
                     </Svg>
                 </TouchableWithoutFeedback>
