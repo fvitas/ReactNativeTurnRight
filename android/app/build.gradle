@@ -97,12 +97,6 @@ def keystorePropertiesFile = rootProject.file("keystore.properties");
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
-println keystorePropertiesFile
-println keystoreProperties
-println keystoreProperties.storePassword
-println keystoreProperties['storePassword']
-println keystorePropertiesFile.exists()
-
 android {
     compileSdkVersion 25
     buildToolsVersion "26.0.2"
