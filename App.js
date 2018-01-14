@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Dimensions, StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
+import { Dimensions, StyleSheet, View, TouchableWithoutFeedback, Vibration } from 'react-native'
 import Svg, {Circle, Rect } from 'react-native-svg'
 
 const window = Dimensions.get('window');
@@ -80,6 +80,7 @@ export default class App extends Component {
 
         if (hit1 || hit2 || hitOuter1) {
             // hit in inner or outer rounded rect, stop game
+            Vibration.vibrate(150)
         } else {
             requestAnimationFrame(this.tick)
         }
