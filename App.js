@@ -81,9 +81,22 @@ export default class App extends Component {
         if (hit1 || hit2 || hitOuter1) {
             // hit in inner or outer rounded rect, stop game
             Vibration.vibrate(150)
+            setTimeout(() => this.restartGame(), 3000)
         } else {
             requestAnimationFrame(this.tick)
         }
+    }
+
+    restartGame() {
+        this.setState({
+            x: window.width / 9,
+            y: window.height / 2.5,
+            deltaX: 0,
+            deltaY: -1,
+            turnAngle: -Math.PI / 2,
+            rotation: 0
+        })
+        requestAnimationFrame(this.tick)
     }
 
     onTouchStart() {
