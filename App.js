@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Dimensions, StyleSheet, View, TouchableWithoutFeedback, Vibration } from 'react-native'
-import Svg, {Circle, Rect } from 'react-native-svg'
+import Svg, {Circle, Rect, Text, G } from 'react-native-svg'
 
 const window = Dimensions.get('window');
 
@@ -15,7 +15,8 @@ export default class App extends Component {
             deltaX: 0,
             deltaY: -1,
             turnAngle: -Math.PI / 2,
-            rotation: 0
+            rotation: 0,
+            numberOfCircles: 0
         }
 
         this.tick = this.tick.bind(this)
@@ -164,8 +165,11 @@ export default class App extends Component {
                     <Svg width='300' height='500'>
                         <Rect x='5' y='5' width='290' height='490' rx='145' ry='145' fill='#9FA8DA'/>
                         <Rect x='95' y='95' width='110' height='310' rx='55' ry='55' fill='white'/>
-                        <Rect x={this.state.x} y={this.state.y} width='18' height='30' fill='black' rx='5' ry='5'
-                              origin={`${this.state.x},${this.state.y}`} rotation={this.state.rotation}/>
+                        <Rect x={this.state.x} y={this.state.y} width='18' height='30' fill='black' rx='5' ry='5' origin={`${this.state.x},${this.state.y}`} rotation={this.state.rotation}/>
+                        <G>
+                            <Circle cx='150' cy='150' r='40' fill='#9FA8DA' />
+                            <Text x='50%' y='150px' dy='0.3em' textAnchor='middle' fill='white' fontSize='22px'>{this.state.numberOfCircles}</Text>
+                        </G>
                     </Svg>
                 </View>
             </TouchableWithoutFeedback>
