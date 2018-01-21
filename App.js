@@ -11,7 +11,7 @@ export default class App extends Component {
 
         this.state = {
             x: window.width / 9,
-            y: window.height / 2.5,
+            y: window.height / 2.4,
             deltaX: 0,
             deltaY: -1,
             turnAngle: -Math.PI / 2,
@@ -24,10 +24,7 @@ export default class App extends Component {
         this.onTouchEnd = this.onTouchEnd.bind(this)
         this.innerCollision = this.innerCollision.bind(this)
         this.outerCollision = this.outerCollision.bind(this)
-    }
-
-    componentDidMount() {
-        requestAnimationFrame(this.tick)
+        this.startGame = this.startGame.bind(this)
     }
 
     componentWillUnmount() {
@@ -82,22 +79,23 @@ export default class App extends Component {
         if (hit1 || hit2 || hitOuter1) {
             // hit in inner or outer rounded rect, stop game
             Vibration.vibrate(150)
-            setTimeout(() => this.restartGame(), 3000)
+            this.setState({ isCrashed: true, isDriving: false })
+            setTimeout(() => this.resetCarPosition(), 2500)
         } else {
             requestAnimationFrame(this.tick)
         }
     }
 
-    restartGame() {
+    resetCarPosition() {
         this.setState({
             x: window.width / 9,
-            y: window.height / 2.5,
+            y: window.height / 2.4,
             deltaX: 0,
             deltaY: -1,
             turnAngle: -Math.PI / 2,
-            rotation: 0
+            rotation: 0,
+            isCrashed: false
         })
-        requestAnimationFrame(this.tick)
     }
 
     onTouchStart() {
@@ -158,9 +156,16 @@ export default class App extends Component {
         return false
     }
 
+    startGame() {
+        if (this.state.isDriving || this.state.isCrashed) return
+
+        this.setState({ isDriving: true })
+        requestAnimationFrame(this.tick)
+    }
+
     render() {
         return (
-            <TouchableWithoutFeedback onPressIn={this.onTouchStart} onPressOut={this.onTouchEnd}>
+            <TouchableWithoutFeedback onPressIn={this.onTouchStart} onPressOut={this.onTouchEnd} onPress={this.startGame}>
                 <View style={styles.container}>
                     <Svg width='300' height='500'>
                         <Rect x='5' y='5' width='290' height='490' rx='145' ry='145' fill='#9FA8DA'/>
